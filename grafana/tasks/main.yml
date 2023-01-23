@@ -31,6 +31,7 @@
     update_cache: yes
     state: present
 
+
 - name: Configure Grafana
   become: yes
   template:
