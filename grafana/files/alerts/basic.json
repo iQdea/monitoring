@@ -1,0 +1,32 @@
+{
+  "template_files": {},
+  "template_file_provenances": {},
+  "alertmanager_config": {
+    "route": {
+      "receiver": "Admin",
+      "group_by": [
+        "grafana_folder",
+        "alertname"
+      ]
+    },
+    "templates": null,
+    "receivers": [
+      {
+        "name": "Admin",
+        "grafana_managed_receiver_configs": [
+          {
+            "uid": "uw_eZ1oVkz",
+            "name": "Admin",
+            "type": "email",
+            "disableResolveMessage": false,
+            "settings": {
+              "addresses": "ivanovanatoliy1506@gmail.com",
+              "singleEmail": true
+            },
+            "secureFields": {}
+          }
+        ]
+      }
+    ]
+  }
+}

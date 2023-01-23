@@ -1,0 +1,7 @@
+---
+# handlers file for prometheus
+- name: reload_prometheus
+  systemd:
+    name: prometheus
+    state: restarted
+    enabled: yes

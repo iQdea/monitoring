@@ -1,0 +1,24 @@
+---
+# defaults file for grafana|
+grafana_pkg: grafana
+grafana_service: grafana-server
+grafana_gpg_location: /tmp/grafana.gpg.key
+grafana_gpg_url: https://packages.grafana.com/gpg.key
+grafana_apt_repo: https://packages.grafana.com/oss/deb
+grafana_apt_release: stable
+grafana_config_file: /etc/grafana/grafana.ini
+grafana_datasources_remote: /etc/grafana/provisioning/datasources/
+grafana_datasources_local: files/provisioning/datasources/*
+grafana_dashboards_config_remote: /etc/grafana/provisioning/dashboards/
+grafana_dashboards_config_local: files/provisioning/dashboards/*
+grafana_dashboards_remote: /var/lib/grafana/dashboards/
+grafana_dashboards_local: files/dashboards/*
+
+grafana_config_protocol: "http"
+grafana_config_ip: "192.168.2.101"
+grafana_config_port: 3000
+grafana_config_rootUrl: "http://192.168.2.101:3000"
+grafana_config_defaultTheme: "light"
+smtp_host: 
+smtp_user: 
+smtp_password:

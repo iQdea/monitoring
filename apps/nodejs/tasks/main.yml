@@ -1,0 +1,35 @@
+---
+# tasks file for nodejs
+- name: Get nvm installer
+  become: yes
+  get_url:
+    url: "{{ nvm_url }}"
+    dest: "{{ nvm_tmp_path }}"
+
+- name: install nvm
+  shell: bash "{{ nvm_tmp_path }}"
+
+- name: install node
+  shell: /bin/bash -ic 'nvm install --lts'
+
+- name: use node
+  shell: /bin/bash -ic 'nvm use --lts'
+
+- name: install app
+  git: 
+    repo: "{{ app_repo }}"
+    dest: "{{ app_root_path }}"
+    update: no
+
+- name: install app modules
+  shell: /bin/bash -ic 'npm i'
+  args:
+    chdir: "{{ app_root_path }}"
+
+- name: install pm2
+  shell: /bin/bash -ic 'npm i pm2 -g'
+
+- name: run app
+  shell: /bin/bash -ic 'pm2 -f start src/index.js'
+  args:
+    chdir: "{{ app_root_path }}"

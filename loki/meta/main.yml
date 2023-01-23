@@ -1,0 +1,14 @@
+galaxy_info:
+  role_name: loki
+  namespace: monitoring
+  author: Anatoliy Ivanov
+  description: Loki role for vagrant box ubuntu/focal64
+  company: ITMO Univeristy
+
+  license: BSD
+
+  min_ansible_version: 2.14.0
+
+  galaxy_tags: []
+
+dependencies: []

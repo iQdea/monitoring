@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Include apps.nodejs"
+      ansible.builtin.include_role:
+        name: "apps.nodejs"

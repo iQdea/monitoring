@@ -1,0 +1,38 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  cachier: machine
+  parallel: true
+  default_box: 'ubuntu/focal64'
+
+platforms:
+  - name: localhost
+    config_options:
+      ssh.keep_alive: yes
+      ssh.remote_user: 'vagrant'
+      synced_folder: true
+    box: 'ubuntu/focal64'
+    memory: 512
+    cpus: 1
+
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      localhost: 
+        ansible_ssh_host: 192.168.2.101
+        ansible_ssh_port: 22
+        ansible_ssh_user: vagrant
+        ansible_ssh_private_key_file: /cygdrive/c/Users/ivano/vagrant-test/.vagrant/machines/srv1/virtualbox/private_key
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge
+    - verify

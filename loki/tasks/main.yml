@@ -1,0 +1,38 @@
+---
+- name: get promtail package
+  shell: "wget {{ promtail_package_url }}" 
+  become: yes
+  args:
+    chdir: "{{ tmp_dir_path }}"
+    creates: "{{ tmp_promtail_path }}"
+
+- name: get loki package
+  shell: "wget {{ loki_package_url }}"
+  become: yes
+  args:
+    chdir: "{{ tmp_dir_path }}"
+    creates: "{{ tmp_loki_path }}"
+
+- name: apt install promtail
+  become: yes
+  apt:
+    deb: "{{ tmp_promtail_path }}"
+
+- name: apt install loki
+  become: yes
+  apt:
+    deb: "{{ tmp_loki_path }}"
+
+- name: start loki
+  become: yes
+  systemd:
+    name: loki
+    state: started
+    enabled: yes
+
+- name: start promtail
+  become: yes
+  systemd:
+    name: promtail
+    state: started
+    enabled: yes

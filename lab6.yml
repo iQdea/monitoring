@@ -1,0 +1,9 @@
+- hosts: webapp
+  roles:
+    - apps/nodejs
+
+- hosts: monitoring
+  roles:
+    - grafana
+    - prometheus
+    - loki

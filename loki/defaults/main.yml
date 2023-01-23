@@ -1,0 +1,7 @@
+---
+# defaults file for loki
+promtail_package_url: https://github.com/grafana/loki/releases/download/v2.7.1/promtail_2.7.1_amd64.deb
+loki_package_url: https://github.com/grafana/loki/releases/download/v2.7.1/loki_2.7.1_amd64.deb
+tmp_dir_path: /tmp
+tmp_promtail_path: /tmp/promtail_2.7.1_amd64.deb
+tmp_loki_path: /tmp/loki_2.7.1_amd64.deb

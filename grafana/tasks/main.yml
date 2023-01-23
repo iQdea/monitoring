@@ -1,0 +1,63 @@
+---
+# tasks file for grafana
+- name: "register status of {{ grafana_gpg_location }}"
+  stat:
+    path: "{{ grafana_gpg_location }}"
+  register: grafana_path
+
+- name: Get grafana gpg key
+  become: yes
+  when: not grafana_path.stat.exists
+  get_url:
+    url: "{{ grafana_gpg_url }}"
+    dest: "{{ grafana_gpg_location }}"
+
+- name: Add grafana gpg key
+  become: yes
+  apt_key:
+    file: "{{ grafana_gpg_location }}"
+    state: present  
+
+- name: Add apt repository
+  become: yes
+  apt_repository:
+    repo: "deb {{ grafana_apt_repo }} {{ grafana_apt_release }} main"
+    state: present
+
+# - name: Install Grafana package
+#   become: yes
+#   apt:
+#     name: "{{ grafana_pkg }}"
+#     update_cache: yes
+#     state: present
+
+- name: Configure Grafana
+  become: yes
+  template:
+    src: grafana.ini.j2
+    dest: "{{ grafana_config_file }}"
+
+- name: Copy datasources config
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "{{ grafana_datasources_remote }}"
+  with_fileglob: "{{ grafana_datasources_local }}"
+
+- name: Copy dashboards config
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "{{ grafana_dashboards_config_remote }}"
+  with_fileglob: "{{ grafana_dashboards_config_local }}"
+
+- name: Copy dashboards
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "{{ grafana_dashboards_remote }}"
+  with_fileglob: "{{ grafana_dashboards_local }}"
+
+- name: Restart grafana
+  command: echo "this task will restart grafana"
+  notify: "restart grafana"
