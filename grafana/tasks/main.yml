@@ -24,12 +24,12 @@
     repo: "deb {{ grafana_apt_repo }} {{ grafana_apt_release }} main"
     state: present
 
-# - name: Install Grafana package
-#   become: yes
-#   apt:
-#     name: "{{ grafana_pkg }}"
-#     update_cache: yes
-#     state: present
+- name: Install Grafana package
+  become: yes
+  apt:
+    name: "{{ grafana_pkg }}"
+    update_cache: yes
+    state: present
 
 - name: Configure Grafana
   become: yes
